@@ -10,7 +10,7 @@ import ComponenteNove from './Components/ComponenteNove'
 import ComponenteDez from './Components/ComponenteDez'
 import ComponentePai from './Components/comunicacao_direta/ComponentePai'
 import ComponenteMae from './Components/comunicacao_indireta/ComponenteMae'
-import ComponenteA from './comunicacao_indireta_2/ComponenteA'
+import ComponenteA from './Components/comunicacao_indireta_2/ComponenteA'
 import ComponenteAvoA from './Components/comunicacao_direta_2/ComponenteAvoA'
 import './App.css'
 
