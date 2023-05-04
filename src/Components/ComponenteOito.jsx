@@ -13,10 +13,8 @@ export default function(props){
 
     return(
         <div className="componente">
-            <p className="titulo">
-                Título: {props.titulo}
-                {condicao()}
-            </p>
+            <p className="titulo">Título: {props.titulo}</p>
+            {condicao()}
         </div>
     )
 }
