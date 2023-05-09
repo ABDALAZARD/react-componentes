@@ -2,29 +2,37 @@ import React, { useState } from 'react'
 
 export default function App() {
 
-    const [valor, setValor] = useState(() => { return 0 });
+    // const [player, setPlayer] = useState({
+    //     name: "Vinicius",
+    //     score: 0
+    // })
 
-    function diminuir() {
-        setValor(valor_antigo => valor_antigo - 1);
-    }
+    const [playerName, setPlayerName] = useState(() => {
+        return "Vinicius";
+    })
 
-    function aumentar() {
-        setValor(valor_antigo => valor_antigo + 1);
+    const [playerScore, setPlayerScore] = useState(() => {
+        return 0;
+    })
+
+    function alterar() {
+        setPlayerName(name_anterior => {
+            return "Vinicius v2"
+        })
+
+        setPlayerScore(sc_anterior => {
+            return sc_anterior + 10
+        })
 
     }
 
     return (        
         <div>
             <h1>React Hooks - useState</h1>
-            <button onClick={diminuir}>Diminuir</button>
-            <span>Valor: {valor}</span>
-            <button onClick={aumentar}>Aumentar</button>
-
-            <button onClick={() => {
-                setValor(va => va + 100)
-            }}>Aumentar v2</button>
-
-            
+            <hr />
+            <h3>Nome: {playerName}</h3>
+            <h3>Pontos: {playerScore}</h3>
+            <button onClick={alterar}>Alterar a pontuação</button>
         </div>
         
     )
