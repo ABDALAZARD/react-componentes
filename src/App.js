@@ -1,33 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function App() {
-
     const [texto, setTexto] = useState('')
-    const inputRef = useRef()
-    const input2Ref = useRef()
+    const anterior = useRef('')
 
-    function focus1() {
-        // inputRef.current.focus()
-        inputRef.current.focus()
-    }
+    useEffect(() => {
+        anterior.current = texto
+    }, [texto])
 
-    function alterar_texto_2() {
-        // inputRef.current.focus()
-        input2Ref.current.value = "Vinicius Abdala"
-        input2Ref.current.focus()
+    function executar() {
     }
 
     return (
         <div>
             <h3>React Hooks - useRef</h3>
             <hr />
-            <input ref={inputRef} type='text' value={texto} onChange={evento => setTexto(evento.target.value)} />
+            <input type='text' onChange={e => { setTexto(e.target.value) }} />
+            <br />
             <hr />
-            <input type="text" ref={input2Ref} />
-            <hr />
-            <button onClick={focus1}>Focus 1</button>
-            <button onClick={alterar_texto_2}>Alterar o texto do input 2</button>
-
-        </div>
+            <button onClick={executar}>Executar</button>
+            <p>Texto: {texto} (anteriormente) {anterior.current}</p>
+        </div >
     )
 }
