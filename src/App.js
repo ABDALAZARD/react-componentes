@@ -1,32 +1,24 @@
-import React, { useState, useCallback } from 'react';
-import Lista from './Lista'
+import React, { useId } from 'react';
 
 export default function App() {
 
-    const [numero, setNumero] = useState(5)
-    const [temaEscuro, setTemaEscuro] = useState(false)
-
-    //Aumenta performace definindo que a função resultados
-    const resultados = useCallback(() => {
-        return [numero * 2, numero * 3, numero * 4]
-    }, [numero])
-
-    //tema do app
-    const tema = {
-        backgroundColor: temaEscuro ? "black" : "white",
-        color: temaEscuro ? "white" : "black",
-        height: "100vh"
-    }
+    const id1 = useId()
+    const id2 = useId()
 
     return (
-        <div style={tema}>
-            <h1>React - useCallBack</h1>
+        <div>
+            <h1>React - useId</h1>
             <hr />
-            <button onClick={() => setTemaEscuro(!temaEscuro)}>Alterar Tema</button>
-            <p>Número: {numero}</p>
-            <button onClick={() => setNumero(oldNumero => oldNumero + 1)}>Incrementar</button>
-            <hr />
-            <Lista resultados={resultados} />
+            <form action="#" method="post">
+                <div>
+                    <input type="checkbox" name="check_masculino" id={id1} />
+                    <label htmlFor={id1}>Texto da checkbox 1</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="check_masculino" id={id2} />
+                    <label htmlFor={id2}>Texto da checkbox 2</label>
+                </div>
+            </form>
         </div>
     )
 }
