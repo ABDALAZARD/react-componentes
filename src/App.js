@@ -1,62 +1,58 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import { useReducer } from 'react';
 
 export default function App() {
 
-    //STATE
-    //A primeira const gera uma lista de arrays vazia
-    const [listaTarefas, setListaTarefas] = useState(() => { return [] })
-    //const e método usado para criar nova tarefa 
-    const [tarefa, setTarefa] = useState(() => { return '' })
+    const [state, dispatch] = useReducer(reducer, {
+        score_1: 0,
+        score_2: 0
+    })
 
-    //REF
-    //prepara variavel para um id diferente a cada tarefa
-    const idTarefa = useRef(0)
-    //variavel usada para focar no input
-    const inputRef = useRef()
-
-    function adicionarTarefa() {
-        //Verifica e adiciona as antigas tarefas a nova lista e adiciona uma nova tarefa com um novo id
-        setListaTarefas(old => { return [...old, { id: idTarefa.current, texto: tarefa }] })
-        //Toda vez que uma nova tarefa for adicionada, o id sofrerá uma soma, gerando um novo id diferente
-        idTarefa.current = idTarefa.current + 1
-        //Limpa o input de tarefas
-        setTarefa('')
-        //Sempre que o botão "adicionar" for clicado, o input referenciado será focado para adicionar outras
-        inputRef.current.focus()
+    function reducer(state, action) {
+        switch (action.type) {
+            case 'SCORE1':
+                return {
+                    score_1: state.score_1 + 1,
+                    score_2: state.score_2
+                }
+            case 'SCORE2':
+                return {
+                    score_1: state.score_1,
+                    score_2: state.score_2 + 1
+                }
+            case 'RESET':
+                return {
+                    score_1: 0,
+                    score_2: 0
+                }
+            default:
+                break;
+        }
     }
 
-    function limparTarefas() {
-        //Reseta a lista de tarefas
-        setListaTarefas([])
-        //Reseta os ids da lista de tarefas
-        idTarefa.current = 0
+    // --------------------------------
+    function incrementar1() {
+        dispatch({ type: "SCORE1" })
     }
 
-    function removerTarefa(id) {
-        //lista e filtra e separa as tarefas que possuem o id diferente do parametor
-        const tmp = listaTarefas.filter(tarefa => tarefa.id !== id)
-        //Atualiza nova lista de tarefas sem a tarefa do id excluido acima
-        setListaTarefas(tmp)
+    function incrementar2() {
+        dispatch({ type: "SCORE2" })
+    }
+
+    function reset() {
+        dispatch({ type: "RESET" })
     }
 
     return (
         <div>
-            <h3>Gestor de Tarefas</h3>
+            <h3>React Hooks - useReducer</h3>
             <hr />
-            <input ref={inputRef} type="text" value={tarefa} onChange={(evento) => { setTarefa(evento.target.value) }} />
-            <hr />
-            <div>
-                <button onClick={adicionarTarefa}>Adicionar</button>
-                <button onClick={limparTarefas}>Limpar Tudo</button>
-            </div>
-            <hr />
-            <p>Tarefas: </p>
-            { //Lista e mapeia todas as tarefas, referenciando um id para cada tarefa, diferenciando uma das outras
-                // Cria também um botão para remover uma tarefa especifica
-                listaTarefas.map((tarefa) => {
-                    return <p key={tarefa.id}>{tarefa.texto} <span onClick={() => { removerTarefa(tarefa.id) }}>[REMOVER]</span></p>
-                })}
+            <h3>Player 1: {state.score_1}</h3>
+            <h3>Player 2: {state.score_2}</h3>
 
+            <button onClick={incrementar1}>Player1</button>
+            <button onClick={incrementar2}>Player2</button>
+            <button onClick={reset}>Reset Score</button>
         </div>
     )
 }
