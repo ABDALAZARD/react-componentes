@@ -1,14 +1,20 @@
 import React from 'react';
-import { Componente1, Componente2, Componente3 } from './componentes.jsx'
+
+//Importando bootstrap
+
+//npm install bootstrap
+//Adicionar as linhas no index.js
+//import 'bootstrap/dist/css/bootstrap.min.css'
+//import 'bootstrap/dist/js/bootstrap.bundle'
+
 export default function App() {
 
     return (
         <div>
-            <h2>React - Multiplos componentes no mesmo arquivo</h2>
+            <h2>React - Adicionar o bootstrap ao projeto</h2>
             <hr />
-            <Componente1 />
-            <Componente2 />
-            <Componente3 />
+            <a href="#" className='btn btn-primary'>Botão de bootstrap</a>
+            <div class="alert alert-success" role="alert">Operação realizada com sucesso!</div>
         </div>
     )
 }
